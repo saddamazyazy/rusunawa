@@ -14,7 +14,7 @@ Materialize has a minimal, sleek, clean and intuitive design which makes your ne
 
 https://pixinvent.com/free-materialize-material-design-admin-template/
 
-[![Materialize Free Material Design Admin Template Presentation](https://pixinvent.com/free-bootstrap-template/robust-lite/robust_lite.jpg "Materialize Free Material Design Admin Template Presentation")](https://pixinvent.com/free-materialize-material-design-admin-template/)
+[![Materialize Free Material Design Admin Template Presentation](https://pixinvent.com/free-materialize-material-design-admin-template/free-materialize-material-design-admin-template.png "Materialize Free Material Design Admin Template Presentation")](https://pixinvent.com/free-materialize-material-design-admin-template/)
 ## Table of contents
 
 - [Prerequisites](#prerequisites)
@@ -29,7 +29,7 @@ https://pixinvent.com/free-materialize-material-design-admin-template/
 
 ## Looking for more features ? Upgrade To Premium
 
-[![Materialize Material Design Admin Template Presentation](https://pixinvent.com/free-bootstrap-template/robust-lite/robust_premium.jpg "Materialize Premium Presentation")](https://pixinvent.com/materialize-material-design-admin-template/landing/)
+[![Materialize Material Design Admin Template Presentation](https://pixinvent.com/free-materialize-material-design-admin-template/premium-materialize-material-design-admin-template.png "Materialize Premium Presentation")](https://pixinvent.com/materialize-material-design-admin-template/landing/)
 
 |Materialize Lite Features|Materialize Pro Features|
 |--- | --- |
@@ -85,7 +85,7 @@ Where task will be name of grunt task and theme-name will the theme you wish to 
 Task | Command | Description
 --- | --- | ---
 Dist|`grunt dist --Layout="fixed-menu`|To clean css, js and build distributable css and js files
-Monitor|`grunt monitor --Layout="fixed-menu`| 	Watch all scss files change and compile it accordingly. In this command you need to pass the Layout parameater in grunt commands
+Monitor|`grunt monitor --Layout="fixed-menu`|   Watch all scss files change and compile it accordingly. In this command you need to pass the Layout parameater in grunt commands
 Build JS | `grunt dist-js` |To clean js files and build distributable js files
 Compile SCSS|`grunt sass-compile --Layout="fixed-menu"`|Compile scss files
 Build CSS|`grunt dist-compile --Layout="fixed-menu"`|To clean css files and build distributable css files
