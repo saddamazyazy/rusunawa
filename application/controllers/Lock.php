@@ -18,7 +18,8 @@ class Lock extends CI_Controller{
 
 		if($isLocked){
 			if($this->form_validation->run('lockscreen') == FALSE){
-				$this->event->view('lockscreen');
+				$url = $this->input->get('redirect') ? "lock?redirect=".$this->input->get('redirect') : "lock";
+				$this->event->view('lockscreen', array('url' => $url));
 			}
 			else{
 				if($this->model->openLock()){
@@ -33,8 +34,9 @@ class Lock extends CI_Controller{
 			}
 		}
 		else{
+			$url = $this->input->get('redirect') ? "lock?redirect=".$this->input->get('redirect') : "lock";
 			$this->session->set_userdata('lock', TRUE);
-			redirect('lock');
+			redirect($url);
 		}
 	}
 

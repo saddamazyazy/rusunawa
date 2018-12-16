@@ -4,8 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class M_laporan extends CI_Model {
 
 	public function data($id=null){
+		$id_user = isAuth('admin') ? array() : array('id_user' => $this->session->userdata('id'));
+
 		$laporan = $this->db
 			->where('id_laporan', $id)
+			->where($id_user)
 			->join('jenis', 'jenis.id_jenis = laporan.id_jenis', 'inner')
 			->get('laporan')
 			->row();
@@ -27,8 +30,12 @@ class M_laporan extends CI_Model {
 	}
 
 	public function file($id=null){
+		$id_user = isAuth('admin') ? array() : array('id_user' => $this->session->userdata('id'));
+		
 		$file = $this->db
 			->where('id_detail', $id)
+			->where($id_user)
+			->join('laporan', 'laporan.id_laporan = detail_laporan.id_laporan', 'inner')
 			->get('detail_laporan')
 			->row();
 

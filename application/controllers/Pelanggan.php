@@ -22,7 +22,7 @@ class Pelanggan extends CI_Controller {
 		}
 		else{
 			$data = $this->input->post();
-			if($id = $this->m_pelanggan->insert($data)){
+			if($id = $this->m_pelanggan->insert()){
 				$this->session->set_flashdata('success', 'Berhasil menyimpan data');
 				redirect('pelanggan/view/'.$id);
 			}
@@ -39,6 +39,7 @@ class Pelanggan extends CI_Controller {
 		if(!empty($pelanggan)){
 			$data['pelanggan'] = $pelanggan;
 			$data['tagihan'] = $this->m_pelanggan->tagihan($id);
+			$data['menu'] = 2;
 
 			$this->event->view('view_pelanggan', $data);
 		}
@@ -48,18 +49,28 @@ class Pelanggan extends CI_Controller {
 	}
 
 	public function edit($id=null){
+		$menu = 2;
+		if(!isAuth('admin')){
+			$id = $this->session->userdata('id');
+			$menu = 1;
+		}
 		$pelanggan = $this->m_pelanggan->data($id);
 
 		if(!empty($pelanggan)){
 			if($this->form_validation->run('edit_pelanggan') == FALSE){
 				$data['pelanggan'] = $pelanggan;
+				$data['menu'] = $menu;
 				$this->event->view('admin/edit_pelanggan', $data);
 			}
 			else{
-				$data = $this->input->post();
-				if($this->m_pelanggan->update($data, $id)){
+				if($this->m_pelanggan->update($id)){
 					$this->session->set_flashdata('success', 'Berhasil memperbarui data');
-					redirect('pelanggan/view/'.$id);
+					if(isAuth('admin')){
+						redirect('pelanggan/view/'.$id);
+					}
+					else{
+						redirect('home');
+					}
 				}
 				else{
 					$this->session->set_flashdata('error', 'Gagal memperbarui data');

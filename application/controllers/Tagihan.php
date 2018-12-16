@@ -15,19 +15,14 @@ class Tagihan extends CI_Controller {
 		$this->event->view('admin/tagihan');
 	}
 
-	public function data_aktif($id=null){
+	public function data_aktif(){
 		if($this->input->is_ajax_request()){
 			if(isAuth('admin')){
 				$this->dataTable->tagihan(TRUE);
 			}
 			else{
-				$tagihan = $this->m_tagihan->data($id);
-				if(!empty($tagihan)){
-					$this->dataTable->tagihan(TRUE, $id);
-				}
-				else{
-					show_404();
-				}
+				$id = $this->session->userdata('id');
+				$this->dataTable->tagihan(TRUE, $id);
 			}
 		}
 		else{
@@ -35,7 +30,7 @@ class Tagihan extends CI_Controller {
 		}
 	}
 
-	public function data_tidak_aktif($id=null){
+	public function data_tidak_aktif(){
 		if($this->input->is_ajax_request()){
 			$this->dataTable->tagihan(FALSE);
 		}
@@ -49,18 +44,10 @@ class Tagihan extends CI_Controller {
 			$this->event->view('admin/tambah_tagihan');
 		}
 		else{
-			$id_user = explode(' - ', $this->input->post('id_user'));
-			$id_user = array_shift($id_user);
+			$id = explode(' - ', $this->input->post('id_user'));
+			$id = array_shift($id);
 
-			$data = array(
-				'id_user' => $id_user,
-				'nama_tagihan' => $this->input->post('nama_tagihan'),
-				'deskripsi' => $this->input->post('deskripsi'),
-				'nominal' => $this->input->post('nominal'),
-				'tanggal_tenggat' => $this->input->post('date'),
-			);
-
-			if($id = $this->m_tagihan->insert($data)){
+			if($id = $this->m_tagihan->insert($id)){
 				$this->session->set_flashdata('success', 'Berhasil menyimpan tagihan');
 				redirect('tagihan/view/'.$id);
 			}
@@ -73,6 +60,7 @@ class Tagihan extends CI_Controller {
 
 	public function view($id=null){
 		$tagihan = $this->m_tagihan->data($id);
+
 		if(!empty($tagihan)){
 			$tagihan->tunggakan = $this->m_tagihan->tunggakan($tagihan);
 
@@ -86,7 +74,22 @@ class Tagihan extends CI_Controller {
 
 	public function pembayaran($id=null){
 		if($this->input->is_ajax_request()){
-			$this->dataTable->pembayaran($id);
+			if(isAuth('admin')){
+				$this->dataTable->pembayaran($id);
+			}
+			elseif(isAuth('user')){
+				$tagihan = $this->m_tagihan->data($id);
+
+				if(!empty($tagihan)){
+					$this->dataTable->pembayaran($id);
+				}
+				else{
+					show_404();
+				}
+			}
+			else{
+				show_404();
+			}
 		}
 		else{
 			show_404();
@@ -146,8 +149,7 @@ class Tagihan extends CI_Controller {
 				$this->event->view('admin/edit_tagihan', $data);
 			}
 			else{
-				$data = $this->input->post();
-				if($data = $this->m_tagihan->update($data, $tagihan->id_tagihan)){
+				if($data = $this->m_tagihan->update($id)){
 					if($data['status'] && $data['affected_rows']){
 						$this->session->set_flashdata('success', 'Berhasil memperbarui data');
 					}

@@ -3,14 +3,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_tagihan extends CI_Model {
 
-	public function insert($data){
+	public function insert($id){
+		$data = array(
+			'id_user' => $id,
+			'nama_tagihan' => $this->input->post('nama_tagihan'),
+			'deskripsi' => $this->input->post('deskripsi'),
+			'nominal' => $this->input->post('nominal'),
+			'tanggal_tenggat' => $this->input->post('date'),
+		);
+
 		$query = $this->db->insert('tagihan', $data);
 
 		return $query ? $this->db->insert_id() : $query;
 	}
 
 	public function data($id){
-		$id_user = isAuth('admin') ? array('1' => '1') : array('id_user', $this->session->userdata('id'));
+		$id_user = isAuth('admin') ? array() : array('id_user' => $this->session->userdata('id'));
 		$tagihan = $this->db
 			->where('id_tagihan', $id)
 			->where($id_user)
@@ -236,7 +244,9 @@ class M_tagihan extends CI_Model {
 		}
 	}
 
-	public function update($data, $id){
+	public function update($id){
+		$data = $this->input->post();
+		
 		$query = $this->db
 			->set('nama_tagihan', $data['nama_tagihan'])
 			->set('deskripsi', $data['deskripsi'])

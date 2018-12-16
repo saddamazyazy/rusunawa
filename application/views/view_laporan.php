@@ -38,7 +38,7 @@
 									</div>
 									<div class="card-content">
 										<img src="<?= assets('materialize/images/avatar/'.html_escape($laporan->petugas->avatar)) ?>" alt="" class="circle responsive-img activator card-profile-image cyan lighten-1 padding-2">
-										<a class="btn-floating activator btn-move-up waves-effect waves-light red accent-2 z-depth-4 right" href="<?= base_url('petugas/edit/'.html_escape($laporan->petugas->id_user)) ?>">
+										<a class="btn-floating activator btn-move-up waves-effect waves-light red accent-2 z-depth-4 right" href="<?= base_url('petugas/edit/'.(isAuth('admin') ? html_escape($laporan->petugas->id_user) : '')) ?>">
 											<i class="material-icons">edit</i>
 										</a>
 										<span class="card-title activator grey-text text-darken-4"><?= html_escape($laporan->petugas->nama) ?></span>
@@ -49,12 +49,14 @@
 											<i class="material-icons left">perm_phone_msg</i> <?= html_escape($laporan->petugas->telepon) ?>
 										</p>
 									</div>
+									<?php if(isAuth('admin')){ ?>
 									<div class="card-action">
-										<?php if(isAuth('admin') && $laporan->isVerified == '0'){ ?>
+										<?php if($laporan->isVerified == '0'){ ?>
 										<a class="blue-text" href="<?= base_url('laporan/verify/'.$laporan->id_laporan) ?>" data-prevent="Apakah anda yakin?">Verifikasi</a>
 										<?php } ?>
 										<a class="red-text" href="<?= base_url('laporan/delete/'.$laporan->id_laporan) ?>" data-prevent="Apakah anda yakin?">Hapus</a>
 									</div>
+									<?php } ?>
 									<div class="card-reveal">
 										<span class="card-title grey-text text-darken-4"><?= html_escape($laporan->petugas->nama) ?>
 											<i class="material-icons right">close</i>

@@ -16,6 +16,9 @@ user_guide_src/cilexer/dist/*
 user_guide_src/cilexer/pycilexer.egg-info/*
 /vendor/
 
+uploads/*
+rusunawa.zip
+
 # IDE Files
 #-------------------------
 /nbproject/

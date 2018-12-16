@@ -23,7 +23,7 @@
 
 			<div class="wrapper">
 
-				<?= sidebar(2) ?>
+				<?= sidebar($menu) ?>
 
 				<section id="content">
 					
@@ -38,7 +38,7 @@
 									</div>
 									<div class="card-content">
 										<img src="<?= assets('materialize/images/avatar/'.html_escape($pelanggan->avatar)) ?>" alt="" class="circle responsive-img activator card-profile-image cyan lighten-1 padding-2">
-										<a class="btn-floating activator btn-move-up waves-effect waves-light red accent-2 z-depth-4 right" href="<?= base_url('pelanggan/edit/'.html_escape($pelanggan->id_user)) ?>">
+										<a class="btn-floating activator btn-move-up waves-effect waves-light red accent-2 z-depth-4 right" href="<?= base_url('pelanggan/edit/'.(isAuth('admin') ? html_escape($pelanggan->id_user) : '')) ?>">
 											<i class="material-icons">edit</i>
 										</a>
 										<span class="card-title activator grey-text text-darken-4"><?= html_escape($pelanggan->nama) ?></span>

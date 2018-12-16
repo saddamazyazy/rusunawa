@@ -144,6 +144,12 @@ class M_berita extends CI_Model {
 		return $data;
 	}
 
+	public function hit($id){
+		return $this->db
+			->set('viewer', 'viewer+1', FALSE)
+			->update('berita');
+	}
+
 }
 
 /* End of file M_berita.php */

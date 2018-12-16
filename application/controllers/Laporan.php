@@ -12,12 +12,18 @@ class Laporan extends CI_Controller {
 	}
 
 	public function index(){
-		$data['jenis'] = $this->m_laporan->jenis();
+		$data = array();
+		if(isAuth('admin')){
+			$data['jenis'] = $this->m_laporan->jenis();
+		}
 		$this->event->view('admin/laporan', $data);
 	}
 
 	public function data($id=null){
 		if($this->input->is_ajax_request()){
+			if(!isAuth('admin')){
+				$id = $this->session->userdata('id');
+			}
 			$this->dataTable->laporan($id);
 		}
 		else{

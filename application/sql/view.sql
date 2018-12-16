@@ -6,7 +6,8 @@ CREATE VIEW `view_tagihan` AS
 			`status`,
 			DATE_FORMAT(`tanggal_tenggat`, '%e %M %Y') AS `tanggal_tenggat`,
 			CONCAT('Rp. ', REPLACE(FORMAT(`nominal`, 0), ',', '.')) AS `nominal`,
-			`p`.`nama`
+			`p`.`nama`,
+			`p`.`id_user`,
 		FROM `tagihan` `t`
 		INNER JOIN `user` `u` 
 			ON `t`.`id_user` = `u`.`id_user`

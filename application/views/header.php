@@ -26,7 +26,7 @@
 					</li>
 					<li class="divider"></li>
 					<li>
-						<a href="<?= base_url('lock') ?>" class="grey-text text-darken-1">
+						<a href="<?= base_url('lock?redirect='.$this->uri->uri_string()) ?>" class="grey-text text-darken-1">
 							<i class="material-icons">lock_outline</i> Kunci</a>
 					</li>
 					<li>

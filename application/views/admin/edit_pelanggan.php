@@ -20,7 +20,7 @@
 
 			<div class="wrapper">
 
-				<?= sidebar(2) ?>
+				<?= sidebar($menu) ?>
 
 				<section id="content">
 					

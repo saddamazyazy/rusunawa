@@ -30,7 +30,9 @@
 					<div class="container py-2">
 						<div class="card-panel">
 							<h5>Tagihan Aktif</h5>
+							<?php if(isAuth('admin')){ ?>
 							<a href="<?= base_url('tagihan/tambah') ?>" class="btn blue right waves-effect waves-light"><i class="material-icons left">add</i>Tambah</a>
+							<?php } ?>
 							<table class="browser-default dataTable" data-ajax="<?= base_url('tagihan/data_aktif') ?>">
 								<thead>
 									<tr>
@@ -45,6 +47,7 @@
 								<tbody></tbody>
 							</table>
 						</div>
+						<?php if(isAuth('admin')){ ?>
 						<div class="card-panel">
 							<h5>Tagihan Tidak Aktif</h5>
 							<a href="<?= base_url('tagihan/tambah') ?>" class="btn blue right waves-effect waves-light"><i class="material-icons left">add</i>Tambah</a>
@@ -62,6 +65,7 @@
 								<tbody></tbody>
 							</table>
 						</div>
+						<?php } ?>
 					</div>
 				</section>
 			</div>

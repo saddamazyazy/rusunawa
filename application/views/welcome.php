@@ -16,6 +16,7 @@
 				background-position: center;
 				background-size: cover;
 				background-repeat: no-repeat;
+				cursor: move;
 			}
 			.carousel-item .card-panel{
 				display: inline-block;

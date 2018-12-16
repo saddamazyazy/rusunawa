@@ -11,7 +11,8 @@ class M_petugas extends CI_Model {
 			->row();
 	}
 
-	public function insert($data){
+	public function insert(){
+		$data = $this->input->post();
 		$user = array(
 			'username' => $data['username'],
 			'password' => password_hash($data['password'], PASSWORD_DEFAULT),
@@ -44,7 +45,8 @@ class M_petugas extends CI_Model {
 		return TRUE;
 	}
 
-	public function update($data, $id){
+	public function update($id){
+		$data = $this->input->post();
 		$user = array(
 			'username' => $data['username'],
 			'avatar' => $data['avatar']

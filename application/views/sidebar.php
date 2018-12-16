@@ -14,7 +14,7 @@
 						</li>
 						<li class="divider"></li>
 						<li>
-							<a href="<?= base_url('lock') ?>" class="grey-text text-darken-1">
+							<a href="<?= base_url('lock?redirect='.$this->uri->uri_string()) ?>" class="grey-text text-darken-1">
 								<i class="material-icons">lock_outline</i> Kunci
 							</a>
 						</li>
@@ -37,30 +37,38 @@
 						<span class="nav-text">Dashboard</span>
 					</a>
 				</li>
+				<?php if(isAuth('admin')){ ?>
 				<li class="bold <?php if($menu==2) echo 'active' ?>">
 					<a href="<?= base_url('pelanggan') ?>" class="waves-effect waves-cyan">
 						<i class="material-icons">people</i>
 						<span class="nav-text">Pelanggan</span>
 					</a>
 				</li>
+				<?php } ?>
+				<?php if(isAuth('admin,user')){ ?>
 				<li class="bold <?php if($menu==3) echo 'active' ?>">
 					<a href="<?= base_url('tagihan') ?>" class="waves-effect waves-cyan">
 						<i class="material-icons">payment</i>
 						<span class="nav-text">Tagihan</span>
 					</a>
 				</li>
+				<?php } ?>
+				<?php if(isAuth('admin')){ ?>
 				<li class="bold <?php if($menu==4) echo 'active' ?>">
 					<a href="<?= base_url('petugas') ?>" class="waves-effect waves-cyan">
 						<i class="material-icons">people_outline</i>
 						<span class="nav-text">Petugas</span>
 					</a>
 				</li>
+				<?php } ?>
+				<?php if(isAuth('admin,petugas')){ ?>
 				<li class="bold <?php if($menu==5) echo 'active' ?>">
 					<a href="<?= base_url('laporan') ?>" class="waves-effect waves-cyan">
 						<i class="material-icons">show_chart</i>
 						<span class="nav-text">Laporan Petugas</span>
 					</a>
 				</li>
+				<?php } ?>
 				<?php if(isAuth('admin')){ ?>
 				<li class="bold <?php if($menu==6) echo 'active' ?>">
 					<a href="<?= base_url('slider') ?>" class="waves-effect waves-cyan">

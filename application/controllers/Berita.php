@@ -39,7 +39,9 @@ class Berita extends CI_Controller {
 		$berita = $this->m_berita->view($slug);
 
 		if(!empty($berita)){
+			$berita->viewer++;
 			$data['berita'] = $berita;
+			$this->m_berita->hit($berita->id_berita);
 			$this->event->view('view_berita', $data);
 		}
 		else{

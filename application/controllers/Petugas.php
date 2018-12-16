@@ -30,8 +30,7 @@ class Petugas extends CI_Controller {
 			$this->event->view('admin/tambah_petugas', $data);
 		}
 		else{
-			$data = $this->input->post();
-			if($id = $this->m_petugas->insert($data)){
+			if($id = $this->m_petugas->insert()){
 				$this->session->set_flashdata('success', 'Berhasil menyimpan data');
 				redirect('petugas/view/'.$id);
 			}
@@ -47,6 +46,7 @@ class Petugas extends CI_Controller {
 
 		if(!empty($petugas)){
 			$data['petugas'] = $petugas;
+			$data['menu'] = 4;
 
 			$this->event->view('view_petugas', $data);
 		}
@@ -56,18 +56,29 @@ class Petugas extends CI_Controller {
 	}
 
 	public function edit($id=null){
+		$menu = 4;
+		if(!isAuth('admin')){
+			$id = $this->session->userdata('id');
+			$menu = 1;
+		}
 		$petugas = $this->m_petugas->data($id);
 
 		if(!empty($petugas)){
 			if($this->form_validation->run('edit_petugas') == FALSE){
 				$data['petugas'] = $petugas;
+				$data['menu'] = $menu;
 				$this->event->view('admin/edit_petugas', $data);
 			}
 			else{
 				$data = $this->input->post();
-				if($this->m_petugas->update($data, $id)){
+				if($this->m_petugas->update($id)){
 					$this->session->set_flashdata('success', 'Berhasil memperbarui data');
-					redirect('petugas/view/'.$id);
+					if(isAuth('admin')){
+						redirect('petugas/view/'.$id);
+					}
+					else{
+						redirect('home');
+					}
 				}
 				else{
 					$this->session->set_flashdata('error', 'Gagal memperbarui data');
@@ -160,7 +171,12 @@ class Petugas extends CI_Controller {
 			elseif(count($_FILES['file']['tmp_name']) > 0){
 				if($total = $this->m_petugas->lapor($id)){
 					$this->session->set_flashdata('success', 'Berhasil menambah laporan dengan '.$total.' gambar');
-					redirect('petugas/view/'.$id);
+					if(isAuth('admin')){
+						redirect('petugas/view/'.$id);
+					}
+					else{
+						redirect('home');
+					}
 				}
 				else{
 					$this->session->set_flashdata('error', 'Gagal menyimpan laporan');

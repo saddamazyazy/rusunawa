@@ -138,7 +138,11 @@
 										<td><?= html_escape($l->jenis) ?></td>
 										<td><?= html_escape($l->total) ?> Berkas</td>
 										<td><?= fix_datetime(html_escape($l->tanggal)) ?></td>
-										<td><?= html_escape($l->id_laporan) ?></td>
+										<td>
+											<a href="<?= base_url('laporan/verify/'.html_escape($l->id_laporan)) ?>" class="btn green waves-effect waves-light">Verifikasi</a>
+											<a href="<?= base_url('laporan/view/'.html_escape($l->id_laporan)) ?>" class="btn blue waves-effect waves-light" target="_blank"><i class="material-icons">visibility</i></a>
+											<a href="<?= base_url('laporan/delete/'.html_escape($l->id_laporan)) ?>" class="btn red waves-effect waves-light"><i class="material-icons">delete_forever</i></a>
+										</td>
 									</tr>
 									<?php } ?>
 								</tbody>

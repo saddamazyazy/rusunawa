@@ -19,7 +19,7 @@
 					<div class="col s12 m6 l4 offset-m3 offset-l4">
 						<div class="card card-panel">
 							<p class="center-align">Silahkan masuk untuk membuka kunci</p>
-							<?= form_open() ?>
+							<?= form_open($url) ?>
 								<div>
 									<img src="<?= base_url('assets/materialize/images/avatar/'.$this->session->userdata('avatar')) ?>" class="responsive-img circle center-block" style="max-width: 100px;max-height: 100px;">
 									<h6 class="center-align grey-text"><?= html_escape($this->session->userdata('username')) ?></h6>

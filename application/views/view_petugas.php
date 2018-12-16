@@ -23,7 +23,7 @@
 
 			<div class="wrapper">
 
-				<?= sidebar(4) ?>
+				<?= sidebar($menu) ?>
 
 				<section id="content">
 					
@@ -38,7 +38,7 @@
 									</div>
 									<div class="card-content">
 										<img src="<?= assets('materialize/images/avatar/'.html_escape($petugas->avatar)) ?>" alt="" class="circle responsive-img activator card-profile-image cyan lighten-1 padding-2">
-										<a class="btn-floating activator btn-move-up waves-effect waves-light red accent-2 z-depth-4 right" href="<?= base_url('petugas/edit/'.html_escape($petugas->id_user)) ?>">
+										<a class="btn-floating activator btn-move-up waves-effect waves-light red accent-2 z-depth-4 right" href="<?= base_url('petugas/edit/'.(isAuth('admin') ? html_escape($petugas->id_user) : '')) ?>">
 											<i class="material-icons">edit</i>
 										</a>
 										<span class="card-title activator grey-text text-darken-4"><?= html_escape($petugas->nama) ?></span>
@@ -72,7 +72,7 @@
 							</div>
 							<div class="col s12 m8 l8">
 								<div class="card-panel">
-								<a href="<?= base_url('petugas/lapor/'.$petugas->id_user) ?>" class="btn blue waves-effect waves-light right"><i class="material-icons left">add</i>Tambah</a>
+								<a href="<?= base_url('petugas/lapor/'.(isAuth('admin') ? html_escape($petugas->id_user) : '')) ?>" class="btn blue waves-effect waves-light right"><i class="material-icons left">add</i>Tambah</a>
 									<table class="browser-default dataTable" data-ajax="<?= base_url('laporan/data/'.$petugas->id_user) ?>">
 										<thead>
 											<tr>

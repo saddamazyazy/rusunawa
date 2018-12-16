@@ -87,7 +87,7 @@ class DataTable extends CI_Model {
 		);
 
 		$where = $isActive ? "status = 'aktif'" : "status = 'tidak aktif'";
-		if(!is_null($id)) $where .= ' AND id_tagihan = '.$this->db->escape($id);
+		if(!is_null($id)) $where .= ' AND id_user = '.$this->db->escape($id);
 
 		$this->connect();
 		$this->ssp->query("SET lc_time_names = 'id_ID'");
@@ -123,7 +123,7 @@ class DataTable extends CI_Model {
 			),
 			array(
 				'db' => 'id',
-				'dt' => 4,
+				'dt' => isAuth('admin') ? 4 : null,
 				'formatter' => function($d, $row){
 					return '<a href="'.base_url('tagihan/cetak/?id='.html_escape($d)).'" class="btn waves-effect waves-light green"><i class="material-icons">print</i></a>';
 				}
@@ -224,7 +224,7 @@ class DataTable extends CI_Model {
 			array('db' => 'id_laporan', 'dt' => $i++),
 			array(
 				'db' => 'nama',
-				'dt' => (is_null($id) ? $i++ : NULL),
+				'dt' => ((is_null($id) || !isAuth('admin')) ? $i++ : NULL),
 				'formatter' => function($d, $row){
 					return html_escape($d);
 				}

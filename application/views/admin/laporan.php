@@ -45,6 +45,7 @@
 							</table>
 						</div>
 
+						<?php if(isAuth('admin')){ ?>
 						<div class="card-panel">
 							<div class="clearfix">
 								<a href="<?= base_url('laporan/tambah_jenis') ?>" class="btn blue right waves-effect waves-light"><i class="material-icons left">add</i>Tambah</a>
@@ -74,6 +75,7 @@
 								</tbody>
 							</table>
 						</div>
+						<?php } ?>
 					</div>
 				</section>
 			</div>
